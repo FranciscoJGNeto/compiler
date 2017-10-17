@@ -1,22 +1,47 @@
 package br.com.principal;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-import br.com.analisador.lexico.AnalisadorLexico;
-import br.com.analisador.lexico.Lexico;
-import br.com.analisador.lexico.LexicoBuilder;
+import br.com.escopo.EscopoBinario;
+import br.com.escopo.EscopoNumerico;
+import br.com.operador.Divisao;
+import br.com.operador.IOperador;
+import br.com.operador.Multiplicacao;
+import br.com.operador.Soma;
+import br.com.operador.Subtracao;
 
 public class Principal {
 	
 	public Principal() {
-		String codigo = "gequal x = random(2,15)\ngvar y + 2 = 2y\ngres x * y";
-		AnalisadorLexico analisadorLexico = new AnalisadorLexico(codigo.split("\n"));
-		LexicoBuilder analisar = analisadorLexico.analisar();
-		List<Lexico> linhas = analisar.getLinhas();
+		String expressao = "5 * ( 2 + ( 8 / 2 ) )";
 		
-		for (Lexico lexico : linhas) {
-			System.out.println("Linha: " + lexico.getLinha() + " tipo " + lexico.getTipo().name());
+		EscopoBinario escopo = new EscopoBinario();
+		for (String unitario : expressao.split(" ")) {
+			if (unitario.matches("[0-9]")) {
+				EscopoNumerico escopoNumerico = new EscopoNumerico();
+				escopoNumerico.setValor(new BigDecimal(unitario));
+				escopo.setEscopo(escopoNumerico);
+			} else if (unitario.equals("+")) {
+				IOperador operador = new Soma();
+				escopo.setOperador(operador);
+			} else if (unitario.equals("-")) {
+				IOperador operador = new Subtracao();
+				escopo.setOperador(operador);
+			} else if (unitario.equals("*")) {
+				IOperador operador = new Multiplicacao();
+				escopo.setOperador(operador);
+			} else if (unitario.equals("/")) {
+				IOperador operador = new Divisao();
+				escopo.setOperador(operador);
+			} else if (unitario.equals("(")) {
+				escopo.createEscopoParenteses();
+			} else if (unitario.equals(")")) {
+				escopo.fecharEscopoParenteses();
+			}
 		}
+		
+		BigDecimal close = escopo.close();
+		System.out.println(close.toString());
 		
 	}
 

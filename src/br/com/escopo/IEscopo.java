@@ -1,9 +1,9 @@
 package br.com.escopo;
 
-import br.com.operador.IOperador;
+import java.math.BigDecimal;
 
 public interface IEscopo {
-	
-	void putOperator(IOperador IOperador);
 
+	BigDecimal close();
+	
 }

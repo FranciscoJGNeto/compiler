@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 
 public interface IOperador {
 	
-	BigDecimal executa();
+	BigDecimal execute(BigDecimal esquerda, BigDecimal direita);
 	
-	Prioridade prioridade = Prioridade.NIVEL1;
+	Integer getPrioridade();
+
 }

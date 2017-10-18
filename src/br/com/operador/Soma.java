@@ -2,7 +2,7 @@ package br.com.operador;
 
 import java.math.BigDecimal;
 
-public class Soma implements IOperador {
+public class Soma extends IOperador {
 
 	@Override
 	public BigDecimal execute(BigDecimal esquerda, BigDecimal direita) {

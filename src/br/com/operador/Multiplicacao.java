@@ -2,7 +2,7 @@ package br.com.operador;
 
 import java.math.BigDecimal;
 
-public class Multiplicacao implements IOperador {
+public class Multiplicacao extends IOperador {
 
 	@Override
 	public BigDecimal execute(BigDecimal esquerda, BigDecimal direita) {

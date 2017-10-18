@@ -2,7 +2,7 @@ package br.com.principal;
 
 import java.math.BigDecimal;
 
-import br.com.escopo.EscopoBinario;
+import br.com.controller.ControllerEscopo;
 import br.com.escopo.EscopoNumerico;
 import br.com.operador.Divisao;
 import br.com.operador.IOperador;
@@ -13,34 +13,34 @@ import br.com.operador.Subtracao;
 public class Principal {
 	
 	public Principal() {
-		String expressao = "5 * ( 2 + ( 8 / 2 ) )";
+		String expressao = "( 2 + 2 * ( 2 + 2 ) ) / 2";
 		
-		EscopoBinario escopo = new EscopoBinario();
+		ControllerEscopo controllerEscopo = new ControllerEscopo();
 		for (String unitario : expressao.split(" ")) {
 			if (unitario.matches("[0-9]")) {
 				EscopoNumerico escopoNumerico = new EscopoNumerico();
 				escopoNumerico.setValor(new BigDecimal(unitario));
-				escopo.setEscopo(escopoNumerico);
+				controllerEscopo.setNumero(escopoNumerico);
 			} else if (unitario.equals("+")) {
 				IOperador operador = new Soma();
-				escopo.setOperador(operador);
+				controllerEscopo.setOperador(operador);
 			} else if (unitario.equals("-")) {
 				IOperador operador = new Subtracao();
-				escopo.setOperador(operador);
+				controllerEscopo.setOperador(operador);
 			} else if (unitario.equals("*")) {
 				IOperador operador = new Multiplicacao();
-				escopo.setOperador(operador);
+				controllerEscopo.setOperador(operador);
 			} else if (unitario.equals("/")) {
 				IOperador operador = new Divisao();
-				escopo.setOperador(operador);
+				controllerEscopo.setOperador(operador);
 			} else if (unitario.equals("(")) {
-				escopo.createEscopoParenteses();
+				controllerEscopo.abrirEscopoPrioritario();
 			} else if (unitario.equals(")")) {
-				escopo.fecharEscopoParenteses();
+				controllerEscopo.fecharEscopoPrioritario();
 			}
 		}
 		
-		BigDecimal close = escopo.close();
+		BigDecimal close = controllerEscopo.close();
 		System.out.println(close.toString());
 		
 	}

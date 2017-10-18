@@ -2,10 +2,10 @@ package br.com.operador;
 
 import java.math.BigDecimal;
 
-public interface IOperador {
+public abstract class IOperador {
 	
-	BigDecimal execute(BigDecimal esquerda, BigDecimal direita);
+	public abstract BigDecimal execute(BigDecimal esquerda, BigDecimal direita);
 	
-	Integer getPrioridade();
+	public abstract Integer getPrioridade();
 
 }

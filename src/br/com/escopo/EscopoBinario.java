@@ -29,7 +29,7 @@ public class EscopoBinario implements IEscopo {
 		} else if (this.direita == null) {
 			this.direita = escopo;
 		} else {
-			throw new RuntimeException("Equação com sintaxe incorreta.");
+			throw new RuntimeException("Equaï¿½ï¿½o com sintaxe incorreta.");
 		}
 	}
 	
@@ -51,6 +51,10 @@ public class EscopoBinario implements IEscopo {
 		IEscopo esquerda = this.esquerda;
 		this.esquerda = null;
 		return esquerda;
+	}
+	
+	public boolean isComplete() {
+		return (this.direita != null && this.esquerda != null && this.operador != null);
 	}
 
 	@Override

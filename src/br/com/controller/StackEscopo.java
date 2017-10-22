@@ -22,8 +22,8 @@ public class StackEscopo<T> {
 	
 	public T pop() {
 		T pop = currentElement();
-		stack[index] = null;
 		index--;
+		stack[index] = null;
 		
 		return pop;
 	}
